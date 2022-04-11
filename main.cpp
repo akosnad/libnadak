@@ -24,6 +24,7 @@ protected:
     Button *b1;
     Button *b2;
     NumberInput *n1;
+    NumberInput *n2;
 
 public:
     MainWindow() : Window(800, 600) {
@@ -35,9 +36,13 @@ public:
         b1 = new Button(this, 60, 120, 120, 60, "big button");
         b2 = new Button(this, 240, 120, 150, 24, "small button");
         n1 = new NumberInput(this, 20, 200, 80, 40, 0);
+        n2 = new NumberInput(this, 150, 200, 64, 24, 50, 0, 100);
     }
 
     virtual void event_handler(event ev) {
+        if(ev.type == ev_key && ev.keycode == key_escape) {
+            exit(0);
+        }
         if(ev.type == ev_mouse && ev.button == -btn_left) {
             if(b1->is_selected(ev)) {
                 cout << "big" << endl;
