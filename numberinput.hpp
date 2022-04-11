@@ -8,7 +8,8 @@ class Window;
 class NumberInput : public Widget {
 protected:
     int _n, _max, _min;
-    bool _inc_pressed, _dec_pressed, _limited;
+    bool _inc_pressed, _dec_pressed, _input_focus;
+    std::string _text;
     void increment(int amount);
     void decrement(int amount);
     void limit();
