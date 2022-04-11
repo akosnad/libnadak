@@ -1,32 +1,57 @@
 #include "graphics.hpp"
+#include "window.hpp"
+#include "widgets.hpp"
+#include "checkbox.hpp"
+#include "inputtextbox.hpp"
+#include "button.hpp"
+#include "numberinput.hpp"
 
+#include <vector>
+#include <iostream>
+#include <fstream>
+
+using namespace std;
 using namespace genv;
 
-#define X 800
-#define Y 800
 
-void clear() {
-    gout << color(0, 0, 0)
-         << move_to(0, 0)
-         << box(X, Y);
-}
+class MainWindow : public Window {
+protected:
+    CheckBox *c1;
+    CheckBox *c2;
+    TextBox *t1;
+    InputTextBox *t2;
+    InputTextBox *t3;
+    Button *b1;
+    Button *b2;
+    NumberInput *n1;
 
-int main() {
-    gout.open(X, Y);
-
-    event ev;
-    gin >> ev;
-    while(gin >> ev) {
-        if(ev.type == ev_key && ev.keycode == key_escape)
-            return 0;
-        else if(ev.type == ev_timer) {
-        }
-
-        clear();
-
-        
-
-        gout << refresh;
+public:
+    MainWindow() : Window(800, 600) {
+        c1 = new CheckBox(this, 10, 10, 24, 24);
+        c2 = new CheckBox(this, 10, 50, 48, 48);
+        t1 = new TextBox(this, 60, 20, 180, "hello textbox");
+        t2 = new InputTextBox(this, 180, 20, 180, "hello world!");
+        t3 = new InputTextBox(this, 180, 80, 240);
+        b1 = new Button(this, 60, 120, 120, 60, "big button");
+        b2 = new Button(this, 240, 120, 150, 24, "small button");
+        n1 = new NumberInput(this, 20, 200, 80, 40, 0);
     }
-    return 0;
+
+    virtual void event_handler(event ev) {
+        if(ev.type == ev_mouse && ev.button == -btn_left) {
+            if(b1->is_selected(ev)) {
+                cout << "big" << endl;
+            } else if(b2->is_selected(ev)) {
+                cout << "small" << endl;
+            } else if(c1->is_selected(ev)) {
+                cout << "checkbox 1: " << c1->is_checked() << endl;
+            }
+        }
+    }
+};
+
+int main()
+{
+    MainWindow w;
+    return w.event_loop();
 }

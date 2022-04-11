@@ -1,0 +1,4 @@
+[submodule "itk_graphicslib"]
+	path = itk_graphicslib
+	url = https://github.com/flugi/ITK_graphicslib/
+	branch = sdl2
