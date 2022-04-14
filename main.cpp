@@ -5,6 +5,7 @@
 #include "inputtextbox.hpp"
 #include "button.hpp"
 #include "numberinput.hpp"
+#include "dropdown.hpp"
 
 #include <vector>
 #include <iostream>
@@ -25,6 +26,8 @@ protected:
     Button *b2;
     NumberInput *n1;
     NumberInput *n2;
+    Dropdown *d1;
+    Dropdown *d2;
 
 public:
     MainWindow() : Window(800, 600) {
@@ -37,11 +40,13 @@ public:
         b2 = new Button(this, 240, 120, 150, 24, "small button");
         n1 = new NumberInput(this, 20, 200, 80, 40, 0);
         n2 = new NumberInput(this, 150, 200, 64, 24, 50, 0, 100);
+        d2 = new Dropdown(this, 400, 52, 240, 24, {"no default here", "hello asd", "world 234", "abc"});
+        d1 = new Dropdown(this, 400, 24, 240, 24, {"hello", "im a default value", "world", "abc"}, 1);
     }
 
     virtual void event_handler(event ev) {
         if(ev.type == ev_key && ev.keycode == key_escape) {
-            exit(0);
+            //exit(0);
         }
         if(ev.type == ev_mouse && ev.button == -btn_left) {
             if(b1->is_selected(ev)) {
@@ -50,6 +55,8 @@ public:
                 cout << "small" << endl;
             } else if(c1->is_selected(ev)) {
                 cout << "checkbox 1: " << c1->is_checked() << endl;
+            } else if(d1->is_selected(ev)) {
+                cout << "dropdown: " << d1->value() << endl;
             }
         }
     }

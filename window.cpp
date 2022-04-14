@@ -34,6 +34,7 @@ int Window::event_loop() {
 }
 
 void Window::draw() const {
+    gout << color(0, 0, 0) << move_to(0, 0) << box(_w, _h);
     for(Widget* w : _widgets)
         w->draw();
     gout << refresh;

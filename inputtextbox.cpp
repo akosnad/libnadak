@@ -49,7 +49,7 @@ void InputTextBox::handle(event ev) {
         if(ev.keycode == key_backspace) {
             if(_text.length() >= 1)
                 _text.pop_back();
-        } else if(ev.keycode == key_escape) {
+        } else if(ev.keycode == key_escape || ev.keycode == key_enter) {
             _input_focus = false;
         } else if(fits_in_box(ev.keyutf8)) {
             _text += ev.keyutf8;
