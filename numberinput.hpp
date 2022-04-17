@@ -19,6 +19,7 @@ public:
     virtual void handle(genv::event);
     virtual void draw();
     virtual void unfocus();
+    int value() { return _n; }
 };
 
 #endif

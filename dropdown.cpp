@@ -46,6 +46,7 @@ void Dropdown::handle(event ev) {
                 _selected_i = _dropdown_highlighted_i;
                 _dropdown_open = false;
                 set_height();
+                // gout.movemouse(ev.pos_x, _y + _h / 2);
             }
         } else if(ev.button == btn_left) {
             _dropdown_pressed = true;

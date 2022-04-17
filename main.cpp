@@ -15,6 +15,9 @@ using namespace std;
 using namespace genv;
 
 
+static const int window_width = 800;
+static const int window_height = 600;
+
 class MainWindow : public Window {
 protected:
     CheckBox *c1;
@@ -29,8 +32,26 @@ protected:
     Dropdown *d1;
     Dropdown *d2;
 
+    TextBox *t_save_description;
+    InputTextBox *t_filename;
+    Button *b_save;
+
+    void save_states(string fname) {
+        cout << "Saving widgets states to " << fname << endl;
+        ofstream f(fname);
+        f << "c1:" << c1->is_checked() << endl;
+        f << "c2:" << c2->is_checked() << endl;
+        f << "t2:" << t2->get_text() << endl;
+        f << "t3:" << t3->get_text() << endl;
+        f << "n1:" << n1->value() << endl;
+        f << "n2:" << n2->value() << endl;
+        f << "d1:" << d1->value() << endl;
+        f << "d2:" << d2->value() << endl;
+        f.close();
+    }
+
 public:
-    MainWindow() : Window(800, 600) {
+    MainWindow() : Window(window_width, window_height) {
         c1 = new CheckBox(this, 10, 10, 24, 24);
         c2 = new CheckBox(this, 10, 50, 48, 48);
         t1 = new TextBox(this, 60, 20, 180, "hello textbox");
@@ -42,6 +63,14 @@ public:
         n2 = new NumberInput(this, 150, 200, 64, 24, 50, 0, 100);
         d2 = new Dropdown(this, 400, 52, 240, 24, {"no default here", "hello asd", "world 234", "abc"});
         d1 = new Dropdown(this, 400, 24, 240, 24, {"hello", "im a default value", "world", "abc"}, 1);
+
+        // Saving section
+        const int filename_w = 120;
+        const int h = gout.cascent() + gout.cdescent() + 15;
+        const string save_description = "Filename to save widget states:";
+        t_save_description = new TextBox(this, window_width - gout.twidth(save_description) - 15, window_height - h * 3, gout.twidth(save_description), save_description);
+        t_filename = new InputTextBox(this, window_width - filename_w - 15, window_height - h * 2, filename_w, "data.txt");
+        b_save = new Button(this, window_width - 56 - 15, window_height - h, 56, 24, "Save");
     }
 
     virtual void event_handler(event ev) {
@@ -57,6 +86,8 @@ public:
                 cout << "checkbox 1: " << c1->is_checked() << endl;
             } else if(d1->is_selected(ev)) {
                 cout << "dropdown: " << d1->value() << endl;
+            } else if(b_save->is_selected(ev)) {
+                save_states(t_filename->get_text());
             }
         }
     }
