@@ -61,8 +61,8 @@ public:
         b2 = new Button(this, 240, 120, 150, 24, "small button");
         n1 = new NumberInput(this, 20, 200, 80, 40, 0);
         n2 = new NumberInput(this, 150, 200, 64, 24, 50, 0, 100);
-        d2 = new Dropdown(this, 400, 52, 240, 24, {"no default here", "hello asd", "world 234", "abc"});
-        d1 = new Dropdown(this, 400, 24, 240, 24, {"hello", "im a default value", "world", "abc"}, 1);
+        d2 = new Dropdown(this, 400, 52, 240, 24, 3, {"no default here", "hello asd", "world 234", "abc"});
+        d1 = new Dropdown(this, 400, 24, 240, 24, 2, {"hello", "im a default value", "world", "abc"}, 1);
 
         // Saving section
         const int filename_w = 120;
