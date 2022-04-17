@@ -4,7 +4,7 @@
 using namespace std;
 using namespace genv;
 
-static const int INC_DEC_BUTTON_W = 15;
+static const int INC_DEC_BUTTON_W = 16;
 
 NumberInput::NumberInput(Window* parent, int x, int y, int w, int h, int n, int min, int max)
     : Widget(parent, x, y, w, h), _n(n), _max(max), _min(min), _inc_pressed(false), _dec_pressed(false), _input_focus(false), _text(to_string(_n)) {
@@ -112,6 +112,7 @@ void NumberInput::draw() {
     else
         gout << color(0, 0, 0);
     gout << move_to(_x + _w - 2 - INC_DEC_BUTTON_W, _y + 2) << box_to(_x + _w - 3, _y + (_h - 3) / 2);
+    gout << color(255, 255, 255) << move_to(_x + _w - INC_DEC_BUTTON_W / 2 - 5, _y + 2 + gout.cascent()) << text("+");
 
     // decrement button
     if(_dec_pressed)
@@ -119,6 +120,7 @@ void NumberInput::draw() {
     else
         gout << color(0, 0, 0);
     gout << move_to(_x + _w - 2 - INC_DEC_BUTTON_W, _y + 2 + (_h - 3) / 2) << box_to(_x + _w - 3, _y + _h - 3);
+    gout << color(255, 255, 255) << move_to(_x + _w - INC_DEC_BUTTON_W / 2 - 5, _y + _h - gout.cdescent()) << text("-");
 }
 
 void NumberInput::unfocus() {
