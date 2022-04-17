@@ -35,16 +35,27 @@ inline void NumberInput::decrement(int amount) {
 
 void NumberInput::handle(event ev) {
     if(ev.type == ev_key) {
-        if(ev.keycode == key_escape || ev.keycode == key_enter) {
+        if(ev.keycode == key_pgup) {
+            increment(10);
+        } else if(ev.keycode == key_pgdn) {
+            decrement(10);
+        } else if(ev.keycode == key_up) {
+            increment(1);
+        } else if(ev.keycode == key_down) {
+            decrement(1);
+        } else if(ev.keycode == key_escape || ev.keycode == key_enter) {
             unfocus();
-        } else if(ev.keycode == key_backspace && _text.length() > 0) {
-            _text.pop_back();
-        } else if(ev.keycode >= 48 && ev.keycode <= 57 && _text.length() < 9) {
-            _text += to_string(ev.keycode - 48);
-            _n = stoi(_text);
-        } else if(ev.keycode == 45 && _text.length() == 0) {
-            _text += "-";
+        } else if(_input_focus) {
+            if(ev.keycode == key_backspace && _text.length() > 0) {
+                _text.pop_back();
+            } else if(ev.keycode >= 48 && ev.keycode <= 57 && _text.length() < 9) {
+                _text += to_string(ev.keycode - 48);
+                _n = stoi(_text);
+            } else if(ev.keycode == 45 && _text.length() == 0) {
+                _text += "-";
+            }
         }
+
     }
     if(ev.type == ev_mouse) {
         if(ev.button == btn_left) {
