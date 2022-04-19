@@ -15,5 +15,3 @@ add_compile_options("-Wall")
 add_library(widgets widgets.cpp window.cpp checkbox.cpp textbox.cpp inputtextbox.cpp button.cpp numberinput.cpp dropdown.cpp)
 add_executable(test_widgets main.cpp)
 target_link_libraries(test_widgets widgets)
-
-ADD_CUSTOM_TARGET(compile_commands ALL  COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json )
