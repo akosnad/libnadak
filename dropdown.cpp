@@ -20,7 +20,7 @@ Dropdown::Dropdown(Window* parent, int x, int y, int w, int h, int n_to_show, st
 }
 
 string Dropdown::value() {
-    if(_selected_i < 0 || _selected_i >= (int)_choices.size())
+    if(_selected_i < 0 || _selected_i >= (int)_choices.size() || _choices.size() == 0)
         return "";
 
     return _choices[_selected_i];
@@ -125,7 +125,8 @@ void Dropdown::draw() {
                 gout << color(0, 0, 0);
 
             gout << move_to(_x + 2, _y + 4 + (i + 1) * ch) << box(_w - 4, ch - 2);
-            gout << color(255, 255, 255) << move_to(_x + 4, _y + 4 + (i + 1) * ch + gout.cascent()) << text(_choices[i + _scroll_i]);
+            if(i +_scroll_i < (int)_choices.size())
+                gout << color(255, 255, 255) << move_to(_x + 4, _y + 4 + (i + 1) * ch + gout.cascent()) << text(_choices[i + _scroll_i]);
         }
     }
 }
