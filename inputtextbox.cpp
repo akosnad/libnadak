@@ -13,7 +13,7 @@ InputTextBox::InputTextBox(Window* parent, int x, int y, int w, string placehold
 }
 
 InputTextBox::InputTextBox(Window* parent, int x, int y, int w)
-    : InputTextBox(parent, x, y, w, "")  {
+    : InputTextBox(parent, x, y, w, "") {
 }
 
 void InputTextBox::draw() {

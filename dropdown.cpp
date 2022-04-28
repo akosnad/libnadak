@@ -7,7 +7,7 @@ using namespace genv;
 static const int DROPDOWN_BUTTON_W = 15;
 
 Dropdown::Dropdown(Window* parent, int x, int y, int w, int h, int n_to_show, std::vector<std::string> choices)
-    : Widget(parent, x, y, w, h), _choices(choices), _selected_i(-1), _closed_h(h), _dropdown_highlighted_i(-1), _n_to_show(n_to_show), _scroll_i(0), _dropdown_pressed(false), _dropdown_open(false) {
+    : Dropdown(parent, x, y, w, h, n_to_show, choices, -1) {
 }
 
 Dropdown::Dropdown(Window* parent, int x, int y, int w, int h, int n_to_show, std::vector<std::string> choices, int default_index)
