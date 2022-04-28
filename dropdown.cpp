@@ -91,6 +91,25 @@ void Dropdown::handle(event ev) {
     }
 }
 
+string Dropdown::remove_selected() {
+    if(_choices.size() == 0)
+        return "";
+
+    string s = _choices[_selected_i];
+    _choices.erase(_choices.begin() + _selected_i);
+
+    if(_selected_i >= (int)_choices.size())
+        _selected_i = (int)_choices.size() - 1;
+
+    if(_dropdown_highlighted_i >= (int)_choices.size())
+        _dropdown_highlighted_i = (int)_choices.size() - 1;
+    return s;
+}
+
+void Dropdown::push(string s) {
+    _choices.push_back(s);
+}
+
 void Dropdown::draw() {
     gout << color(255, 255, 255) << move_to(_x, _y) << box(_w, _closed_h);
 

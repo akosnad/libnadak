@@ -21,6 +21,8 @@ public:
     virtual void handle(genv::event);
     virtual void unfocus();
     std::string value();
+    std::string remove_selected();
+    void push(std::string);
 };
 
 #endif
