@@ -3,8 +3,12 @@
 using namespace std;
 using namespace genv;
 
+Button::Button(Window* parent, int x, int y, int w, int h, string text, function<void()> on_pressed)
+    : Widget(parent, x, y, w, h), _pressed(false), _text(text), _on_pressed(on_pressed) {
+}
+
 Button::Button(Window* parent, int x, int y, int w, int h, string text)
-    : Widget(parent, x, y, w, h), _pressed(false), _text(text) {
+    : Widget(parent, x, y, w, h), _pressed(false), _text(text), _on_pressed(nullptr) {
 }
 
 void Button::draw() {
@@ -24,7 +28,10 @@ void Button::handle(event ev) {
     if(ev.type == ev_mouse) {
         if(ev.button == btn_left)
             _pressed = true;
-        else if(ev.button == -btn_left)
+        else if(ev.button == -btn_left) {
+            if(_pressed && _on_pressed)
+                _on_pressed();
             _pressed = false;
+        }
     }
 }
