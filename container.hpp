@@ -12,6 +12,7 @@ public:
     Container();
     Container(std::vector<Widget*>);
     void add_child(Widget* w) { _children.push_back(w); };
+    void erase_child(Widget* w);
     void handle_children_events(genv::event);
     void draw_children() const;
 };

@@ -33,6 +33,7 @@ protected:
     Dropdown *d1;
     Dropdown *d2;
     Box *box1;
+    vector<Button*> btn_list;
 
     TextBox *t_save_description;
     InputTextBox *t_filename;
@@ -60,8 +61,15 @@ public:
         t1 = new TextBox(this, 60, 20, 180, "hello textbox");
         t2 = new InputTextBox(this, 180, 20, 180, "hello world!");
         t3 = new InputTextBox(this, 180, 80, 240);
-        b1 = new Button(this, 60, 120, 120, 60, "big button");
-        b2 = new Button(this, 240, 120, 150, 24, "small button");
+        b1 = new Button(this, 60, 120, 120, 60, "big button", [this]() {
+                if(btn_list.size() <= 0) return;
+                Button* b = btn_list[btn_list.size() - 1];
+                btn_list.pop_back();
+                delete b;
+        });
+        b2 = new Button(this, 240, 120, 150, 24, "small button", [this](){
+                btn_list.push_back(new Button(this, 240, 120 + (24 * (btn_list.size() + 1)), 150, 24, to_string(btn_list.size())));
+        });
         n1 = new NumberInput(this, 20, 200, 80, 40, 0);
         n2 = new NumberInput(this, 150, 200, 64, 28, 50, 0, 100);
         d2 = new Dropdown(box1, 400, 52, 240, 24, 3, {"no default here", "hello asd", "world 234", "abc"});

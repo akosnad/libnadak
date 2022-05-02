@@ -11,6 +11,7 @@ protected:
     int _x, _y, _w, _h;
 public:
     Widget(Container*, int, int, int, int);
+    virtual ~Widget();
     virtual bool is_selected(genv::event);
     virtual void draw() = 0;
     virtual void handle(genv::event ev) = 0;

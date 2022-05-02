@@ -1,4 +1,5 @@
 #include "container.hpp"
+#include <algorithm>
 
 using namespace std;
 using namespace genv;
@@ -31,4 +32,9 @@ void Container::handle_children_events(event ev) {
 void Container::draw_children() const {
     for(Widget* w: _children)
         w->draw();
+}
+
+void Container::erase_child(Widget* w) {
+    auto it = find(_children.begin(), _children.end(), w);
+    _children.erase(it);
 }
