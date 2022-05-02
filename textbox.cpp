@@ -3,7 +3,7 @@
 using namespace std;
 using namespace genv;
 
-TextBox::TextBox(Window* parent, int x, int y, int w, string text)
+TextBox::TextBox(Container* parent, int x, int y, int w, string text)
     : Widget(parent, x, y, w, gout.cascent() + gout.cdescent() + 4), _text(text) {
 }
 

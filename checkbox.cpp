@@ -3,7 +3,7 @@
 #include <cmath>
 using namespace genv;
 
-CheckBox::CheckBox(Window* parent, int x, int y, int w, int h)
+CheckBox::CheckBox(Container* parent, int x, int y, int w, int h)
     : Widget(parent, x, y, w, h), _checked(false)
 {
 }

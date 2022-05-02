@@ -15,8 +15,8 @@ protected:
     void scroll_down();
     void scroll_up();
 public:
-    Dropdown(Window* parent, int x, int y, int w, int h, int n_to_show, std::vector<std::string> choices);
-    Dropdown(Window* parent, int x, int y, int w, int h, int n_to_show, std::vector<std::string> choices, int default_index);
+    Dropdown(Container* parent, int x, int y, int w, int h, int n_to_show, std::vector<std::string> choices);
+    Dropdown(Container* parent, int x, int y, int w, int h, int n_to_show, std::vector<std::string> choices, int default_index);
     virtual void draw();
     virtual void handle(genv::event);
     virtual void unfocus();

@@ -9,7 +9,7 @@ class CheckBox : public Widget {
 protected:
     bool _checked;
 public:
-    CheckBox(Window*, int, int, int, int);
+    CheckBox(Container*, int, int, int, int);
     virtual void draw();
     virtual void handle(genv::event ev);
     virtual bool is_checked() { return _checked; };

@@ -12,6 +12,6 @@ link_libraries(
 
 add_compile_options("-Wall")
 
-add_library(nadak_lib widgets.cpp window.cpp checkbox.cpp textbox.cpp inputtextbox.cpp button.cpp numberinput.cpp dropdown.cpp)
+add_library(nadak_lib widgets.cpp window.cpp checkbox.cpp textbox.cpp inputtextbox.cpp button.cpp numberinput.cpp dropdown.cpp box.cpp container.cpp)
 add_executable(test_widgets main.cpp)
 target_link_libraries(test_widgets nadak_lib)

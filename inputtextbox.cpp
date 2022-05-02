@@ -4,7 +4,7 @@
 using namespace std;
 using namespace genv;
 
-InputTextBox::InputTextBox(Window* parent, int x, int y, int w, string placeholder)
+InputTextBox::InputTextBox(Container* parent, int x, int y, int w, string placeholder)
     : TextBox(parent, x, y, w, placeholder), _input_focus(false), _cursor_flash(true) {
         if(!fits_in_box("")) {
             cout << "Placeholder text doesn't fit in InputTextBox" << endl;
@@ -12,7 +12,7 @@ InputTextBox::InputTextBox(Window* parent, int x, int y, int w, string placehold
         }
 }
 
-InputTextBox::InputTextBox(Window* parent, int x, int y, int w)
+InputTextBox::InputTextBox(Container* parent, int x, int y, int w)
     : InputTextBox(parent, x, y, w, "") {
 }
 

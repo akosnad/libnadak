@@ -14,8 +14,8 @@ protected:
     void decrement(int amount);
     void limit();
 public:
-    NumberInput(Window*, int x, int y, int w, int h, int n, int min, int max);
-    NumberInput(Window*, int x, int y, int w, int h, int n);
+    NumberInput(Container*, int x, int y, int w, int h, int n, int min, int max);
+    NumberInput(Container*, int x, int y, int w, int h, int n);
     virtual void handle(genv::event);
     virtual void draw();
     virtual void unfocus();

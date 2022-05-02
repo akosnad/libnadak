@@ -6,11 +6,11 @@ using namespace genv;
 
 static const int INC_DEC_BUTTON_W = 16;
 
-NumberInput::NumberInput(Window* parent, int x, int y, int w, int h, int n, int min, int max)
+NumberInput::NumberInput(Container* parent, int x, int y, int w, int h, int n, int min, int max)
     : Widget(parent, x, y, w, h), _n(n), _max(max), _min(min), _inc_pressed(false), _dec_pressed(false), _input_focus(false), _text(to_string(_n)) {
 }
 
-NumberInput::NumberInput(Window* parent, int x, int y, int w, int h, int n)
+NumberInput::NumberInput(Container* parent, int x, int y, int w, int h, int n)
     : NumberInput(parent, x, y, w, h, n, INT32_MIN, INT32_MAX) {
 }
 

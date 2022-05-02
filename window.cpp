@@ -3,30 +3,15 @@
 using namespace std;
 using namespace genv;
 
-Window::Window(int width, int height) : _w(width), _h(height) {
+Window::Window(int width, int height) : Container(), _w(width), _h(height) {
     gout.open(_w, _h);
 }
 
 int Window::event_loop() {
     event ev;
-    int focus = -1;
     gin.timer(500);
     while(gin >> ev ) {
-        int old_focus = focus;
-        if (ev.type == ev_mouse && ev.button == btn_left) {
-            focus = -1;
-            for (size_t i = 0; i < _widgets.size(); i++) {
-                if (_widgets[i]->is_selected(ev)) {
-                        focus = i;
-                }
-            }
-        }
-
-        if(old_focus != focus && old_focus != -1)
-            _widgets[old_focus]->unfocus();
-        if(focus != -1)
-            _widgets[focus]->handle(ev);
-
+        handle_children_events(ev);
         event_handler(ev);
         draw();
     }
@@ -35,8 +20,7 @@ int Window::event_loop() {
 
 void Window::draw() const {
     gout << color(0, 0, 0) << move_to(0, 0) << box(_w, _h);
-    for(Widget* w : _widgets)
-        w->draw();
+    draw_children();
     gout << refresh;
 }
 

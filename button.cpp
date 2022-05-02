@@ -3,11 +3,11 @@
 using namespace std;
 using namespace genv;
 
-Button::Button(Window* parent, int x, int y, int w, int h, string text, function<void()> on_pressed)
+Button::Button(Container* parent, int x, int y, int w, int h, string text, function<void()> on_pressed)
     : Widget(parent, x, y, w, h), _pressed(false), _text(text), _on_pressed(on_pressed) {
 }
 
-Button::Button(Window* parent, int x, int y, int w, int h, string text)
+Button::Button(Container* parent, int x, int y, int w, int h, string text)
     : Widget(parent, x, y, w, h), _pressed(false), _text(text), _on_pressed(nullptr) {
 }
 

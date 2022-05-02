@@ -1,12 +1,12 @@
 #include "widgets.hpp"
-#include "window.hpp"
+#include "container.hpp"
 #include "graphics.hpp"
 
 using namespace genv;
 
-Widget::Widget(Window* parent, int x, int y, int w, int h) : _parent(parent), _x(x), _y(y), _w(w), _h(h)
+Widget::Widget(Container* parent, int x, int y, int w, int h) : _parent(parent), _x(x), _y(y), _w(w), _h(h)
 {
-    _parent->add_widget(this);
+    _parent->add_child(this);
 }
 
 bool Widget::is_selected(event ev)
