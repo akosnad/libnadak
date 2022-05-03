@@ -33,6 +33,7 @@ protected:
     Dropdown *d1;
     Dropdown *d2;
     Box *box1;
+    Box *box2;
     vector<Button*> btn_list;
 
     TextBox *t_save_description;
@@ -56,6 +57,7 @@ protected:
 public:
     MainWindow() : Window(window_width, window_height) {
         box1 = new Box(this, 236, 12, 400, 400);
+        box2 = new Box(box1, 60, 136, 250, 250);
         c1 = new CheckBox(this, 10, 10, 24, 24);
         c2 = new CheckBox(this, 10, 50, 48, 48);
         t1 = new TextBox(this, 60, 20, 180, "hello textbox");
@@ -68,7 +70,7 @@ public:
                 delete b;
         });
         b2 = new Button(this, 240, 120, 150, 24, "small button", [this](){
-                btn_list.push_back(new Button(this, 240, 120 + (24 * (btn_list.size() + 1)), 150, 24, to_string(btn_list.size())));
+                btn_list.push_back(new Button(box2, 240, 120 + (24 * (btn_list.size() + 1)), 150, 24, to_string(btn_list.size())));
         });
         n1 = new NumberInput(this, 20, 200, 80, 40, 0);
         n2 = new NumberInput(this, 150, 200, 64, 28, 50, 0, 100);

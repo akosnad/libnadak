@@ -13,6 +13,9 @@ Container::Container(vector<Widget*> children)
 }
 
 void Container::handle_children_events(event ev) {
+    if(_children.size() < _focus || _children.size() == 0)
+        _focus = -1;
+
     int old_focus = _focus;
     if (ev.type == ev_mouse && ev.button == btn_left) {
         _focus = -1;
