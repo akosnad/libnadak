@@ -17,11 +17,19 @@ void Container::handle_children_events(event ev) {
         _focus = -1;
 
     int old_focus = _focus;
-    if (ev.type == ev_mouse && ev.button == btn_left) {
-        _focus = -1;
-        for (size_t i = 0; i < _children.size(); i++) {
-            if (_children[i]->is_selected(ev)) {
+    if(ev.type == ev_mouse) {
+        if(ev.button == btn_left) {
+            _focus = -1;
+            for(size_t i = 0; i < _children.size(); i++) {
+                if (_children[i]->is_selected(ev)) {
                     _focus = i;
+                }
+            }
+        } else {
+            for(size_t i = 0; i < _children.size(); i++) {
+                if(_children[i]->is_selected(ev) && _children[i]->is_focus_on_hover()) {
+                    _focus = i;
+                }
             }
         }
     }

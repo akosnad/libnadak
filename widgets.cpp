@@ -4,7 +4,7 @@
 
 using namespace genv;
 
-Widget::Widget(Container* parent, int x, int y, int w, int h) : _parent(parent), _x(x), _y(y), _w(w), _h(h)
+Widget::Widget(Container* parent, int x, int y, int w, int h) : _parent(parent), _x(x), _y(y), _w(w), _h(h), _focus_on_hover(false)
 {
     _parent->add_child(this);
 }
