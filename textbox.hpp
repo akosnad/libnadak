@@ -13,6 +13,7 @@ public:
     virtual void draw();
     virtual void handle(genv::event ev);
     std::string get_text() { return _text; };
+    void set_text(std::string s) { _text = s; };
 };
 
 #endif

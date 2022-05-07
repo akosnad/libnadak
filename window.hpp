@@ -14,7 +14,7 @@ protected:
 public:
     Window(int width, int height);
     int event_loop();
-    virtual void event_handler(genv::event) = 0;
+    virtual void event_handler(genv::event) {};
 };
 
 #endif
