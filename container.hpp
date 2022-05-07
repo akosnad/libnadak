@@ -15,6 +15,7 @@ public:
     void erase_child(Widget* w);
     void handle_children_events(genv::event);
     void draw_children() const;
+    void focus_child(Widget* w);
 };
 
 #endif

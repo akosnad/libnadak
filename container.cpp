@@ -41,3 +41,8 @@ void Container::erase_child(Widget* w) {
     auto it = find(_children.begin(), _children.end(), w);
     _children.erase(it);
 }
+
+void Container::focus_child(Widget* w) {
+    auto it = find(_children.begin(), _children.end(), w);
+    _focus = it - _children.begin();
+}
