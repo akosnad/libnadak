@@ -7,6 +7,7 @@
 #include "numberinput.hpp"
 #include "dropdown.hpp"
 #include "box.hpp"
+#include "sprite.hpp"
 
 #include <vector>
 #include <iostream>
@@ -35,6 +36,7 @@ protected:
     Box *box1;
     Box *box2;
     vector<Button*> btn_list;
+    Sprite *sprite;
 
     TextBox *t_save_description;
     InputTextBox *t_filename;
@@ -76,6 +78,7 @@ public:
         n2 = new NumberInput(this, 150, 200, 64, 28, 50, 0, 100);
         d2 = new Dropdown(box1, 400, 52, 240, 24, 3, {"no default here", "hello asd", "world 234", "abc"});
         d1 = new Dropdown(box1, 400, 24, 240, 24, 2, {"hello", "im a default value", "world", "abc"}, 1);
+        sprite = new Sprite(this, 350, 350, 120, 120, "sample.bmp");
 
         // Saving section
         const int filename_w = 120;
