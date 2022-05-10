@@ -32,6 +32,11 @@ void Sprite::load_from_bitmap(string path) {
     bitmap_cache[path] = _canvas;
 }
 
+void Sprite::move(int x, int y) {
+    _x = x;
+    _y = y;
+}
+
 void Sprite::draw() {
     gout << stamp(_canvas, 0, 0, _w, _h, _x, _y);
 }
