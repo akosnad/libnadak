@@ -37,6 +37,7 @@ protected:
     Box *box2;
     vector<Button*> btn_list;
     Sprite *sprite;
+    Sprite *sprite2;
 
     TextBox *t_save_description;
     InputTextBox *t_filename;
@@ -79,6 +80,7 @@ public:
         d2 = new Dropdown(box1, 400, 52, 240, 24, 3, {"no default here", "hello asd", "world 234", "abc"});
         d1 = new Dropdown(box1, 400, 24, 240, 24, 2, {"hello", "im a default value", "world", "abc"}, 1);
         sprite = new Sprite(this, 350, 350, 120, 120, "sample.bmp");
+        sprite2 = new Sprite(this, 350 + 128, 350, 120, 120, "sample.bmp");
 
         // Saving section
         const int filename_w = 120;

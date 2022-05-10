@@ -78,6 +78,6 @@ genv::canvas BMP::to_canvas() {
 }
 
 bool BMP::check_format() {
-    // TODO: implement
+    // TODO: support other formats, and do checking
     return true;
 }
