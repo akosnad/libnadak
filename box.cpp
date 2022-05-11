@@ -12,7 +12,6 @@ Box::Box(Container* parent, int x, int y, int w, int h, vector<Widget*> children
 }
 
 void Box::draw() {
-    gout << color(16, 16, 16) << move_to(_x, _y) << box(_w, _h);
     draw_children();
 }
 
