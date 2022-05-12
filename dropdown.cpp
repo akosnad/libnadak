@@ -110,6 +110,10 @@ void Dropdown::push(string s) {
     _choices.push_back(s);
 }
 
+void Dropdown::set(vector<string> choices) {
+    _choices = choices;
+}
+
 void Dropdown::draw() {
     gout << color(255, 255, 255) << move_to(_x, _y) << box(_w, _closed_h);
 

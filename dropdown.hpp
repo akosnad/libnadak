@@ -23,6 +23,7 @@ public:
     std::string value();
     std::string remove_selected();
     void push(std::string);
+    void set(std::vector<std::string> choices);
 };
 
 #endif
