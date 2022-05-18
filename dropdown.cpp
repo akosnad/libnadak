@@ -30,7 +30,7 @@ string Dropdown::value() {
 
 void Dropdown::set_height() {
     if(_dropdown_open) {
-        if(_choices.size() < _n_to_show)
+        if((int)_choices.size() < _n_to_show)
             _h = _closed_h + _choices.size() * DH;
         else
             _h = _closed_h + _n_to_show * DH;
@@ -46,6 +46,9 @@ void Dropdown::scroll_down() {
 
     if(_dropdown_highlighted_i >= _scroll_i + _n_to_show)
         _scroll_i++;
+
+    if(!_dropdown_open)
+        _selected_i = _dropdown_highlighted_i;
 }
 
 void Dropdown::scroll_up() {
@@ -56,6 +59,9 @@ void Dropdown::scroll_up() {
 
     if(_dropdown_highlighted_i < _scroll_i)
         _scroll_i--;
+
+    if(!_dropdown_open)
+        _selected_i = _dropdown_highlighted_i;
 }
 
 void Dropdown::handle(event ev) {
@@ -70,9 +76,12 @@ void Dropdown::handle(event ev) {
         } else if(ev.keycode == key_up) {
             scroll_up();
         }
-    }
-    if(ev.type == ev_mouse) {
-        if(_dropdown_open && ev.pos_y > _y + _closed_h) {
+    } else if(ev.type == ev_mouse) {
+        if(ev.button == btn_wheeldown) {
+            scroll_down();
+        } else if(ev.button == btn_wheelup) {
+            scroll_up();
+        } else if(_dropdown_open && ev.pos_y > _y + _closed_h) {
             // inside dropdown
             if(ev.button == btn_left) {
                 int ch = gout.cascent() + gout.cdescent() + 4;
@@ -82,10 +91,6 @@ void Dropdown::handle(event ev) {
                 _selected_i = _dropdown_highlighted_i;
                 _dropdown_open = false;
                 set_height();
-            } else if(ev.button == btn_wheeldown) {
-                scroll_down();
-            } else if(ev.button == btn_wheelup) {
-                scroll_up();
             }
         } else if(ev.button == btn_left) {
             _dropdown_pressed = true;
@@ -150,7 +155,7 @@ void Dropdown::draw() {
     // dropdown
     if(_dropdown_open) {
         int n = _n_to_show;
-        if(n > _choices.size())
+        if(n > (int)_choices.size())
             n = _choices.size();
 
         int dh = n * DH;
