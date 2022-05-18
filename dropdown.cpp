@@ -5,6 +5,8 @@ using namespace std;
 using namespace genv;
 
 static const int DROPDOWN_BUTTON_W = 15;
+static const int CH = gout.cascent() + gout.cdescent();
+static const int DH = CH + 4;
 
 Dropdown::Dropdown(Container* parent, int x, int y, int w, int h, int n_to_show, std::vector<std::string> choices)
     : Dropdown(parent, x, y, w, h, n_to_show, choices, -1) {
@@ -27,9 +29,13 @@ string Dropdown::value() {
 }
 
 void Dropdown::set_height() {
-    if(_dropdown_open)
-        _h = _closed_h + _choices.size() * (gout.cascent() + gout.cdescent() + 4);
-    else _h = _closed_h;
+    if(_dropdown_open) {
+        if(_choices.size() < _n_to_show)
+            _h = _closed_h + _choices.size() * DH;
+        else
+            _h = _closed_h + _n_to_show * DH;
+    } else
+        _h = _closed_h;
 }
 
 void Dropdown::scroll_down() {
@@ -112,6 +118,12 @@ void Dropdown::push(string s) {
 
 void Dropdown::set(vector<string> choices) {
     _choices = choices;
+
+    if(_selected_i >= (int)_choices.size())
+        _selected_i = (int)_choices.size() - 1;
+
+    if(_dropdown_highlighted_i >= (int)_choices.size())
+        _dropdown_highlighted_i = (int)_choices.size() - 1;
 }
 
 void Dropdown::draw() {
@@ -137,19 +149,22 @@ void Dropdown::draw() {
 
     // dropdown
     if(_dropdown_open) {
-        int ch = gout.cascent() + gout.cdescent() + 4;
-        int dh = _n_to_show * ch;
+        int n = _n_to_show;
+        if(n > _choices.size())
+            n = _choices.size();
+
+        int dh = n * DH;
         gout << color(255, 255, 255) << move_to(_x, _y + _closed_h) << box(_w, dh);
 
-        for(int i = 0; i < _n_to_show; i++) {
+        for(int i = 0; i < n; i++) {
             if(_dropdown_highlighted_i == i + _scroll_i)
                 gout << color(127, 127, 127);
             else
                 gout << color(0, 0, 0);
 
-            gout << move_to(_x + 2, _y + 4 + (i + 1) * ch) << box(_w - 4, ch - 2);
+            gout << move_to(_x + 2, _y + 4 + (i + 1) * DH) << box(_w - 4, DH - 2);
             if(i +_scroll_i < (int)_choices.size())
-                gout << color(255, 255, 255) << move_to(_x + 4, _y + 4 + (i + 1) * ch + gout.cascent()) << text(_choices[i + _scroll_i]);
+                gout << color(255, 255, 255) << move_to(_x + 4, _y + 4 + (i + 1) * DH + gout.cascent()) << text(_choices[i + _scroll_i]);
         }
     }
 }

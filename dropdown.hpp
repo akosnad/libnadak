@@ -21,6 +21,7 @@ public:
     virtual void handle(genv::event);
     virtual void unfocus();
     std::string value();
+    int get_selected_idx() { return _selected_i; }
     std::string remove_selected();
     void push(std::string);
     void set(std::vector<std::string> choices);
