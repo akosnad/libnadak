@@ -10,27 +10,44 @@ NumberInput::NumberInput(Container* parent, int x, int y, int w, int h, int n, i
     : Widget(parent, x, y, w, h), _n(n), _max(max), _min(min), _inc_pressed(false), _dec_pressed(false), _input_focus(false), _text(to_string(_n)) {
 }
 
+NumberInput::NumberInput(Container* parent, int x, int y, int w, int h, int n, int min, int max, function<void(int)> on_changed)
+    : Widget(parent, x, y, w, h), _n(n), _max(max), _min(min), _inc_pressed(false), _dec_pressed(false), _input_focus(false), _text(to_string(_n)), _on_changed(on_changed) {
+}
+
 NumberInput::NumberInput(Container* parent, int x, int y, int w, int h, int n)
     : NumberInput(parent, x, y, w, h, n, INT32_MIN, INT32_MAX) {
 }
 
+NumberInput::NumberInput(Container* parent, int x, int y, int w, int h, int n, function<void(int)> on_changed)
+    : NumberInput(parent, x, y, w, h, n, INT32_MIN, INT32_MAX, on_changed) {
+}
+
 void NumberInput::limit() {
+    int old_n = _n;
+
     if(_n > _max)
         _n = _max;
     else if(_n < _min)
         _n = _min;
 
     _text = to_string(_n);
+
+    if(_on_changed && old_n != _n)
+        _on_changed(_n);
 }
 
 inline void NumberInput::increment(int amount) {
     _n += amount;
     limit();
+    if(_on_changed)
+        _on_changed(_n);
 }
 
 inline void NumberInput::decrement(int amount) {
     _n -= amount;
     limit();
+    if(_on_changed)
+        _on_changed(_n);
 }
 
 void NumberInput::handle(event ev) {
@@ -127,5 +144,11 @@ void NumberInput::unfocus() {
     _inc_pressed = false;
     _dec_pressed = false;
     _input_focus = false;
+    limit();
+}
+
+void NumberInput::set_limits(int min, int max) {
+    _min = min;
+    _max = max;
     limit();
 }
