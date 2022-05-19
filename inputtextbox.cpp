@@ -28,7 +28,7 @@ void InputTextBox::draw() {
     gout << move_to(_x, _y) << box_to(_x + _w, _y + _h);
 
     // text
-    gout << move_to(_x, _y + gout.cascent() + 2) << color(255, 255, 255);
+    gout << move_to(_x, _y + gout.cdescent()) << color(255, 255, 255);
     gout << text(_text);
 
     if(_input_focus && _cursor_flash) {

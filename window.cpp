@@ -5,6 +5,7 @@ using namespace genv;
 
 Window::Window(int width, int height) : Container(), _w(width), _h(height) {
     gout.open(_w, _h);
+    gout.load_font("LiberationSans-Regular.ttf");
 }
 
 int Window::event_loop() {

@@ -97,13 +97,13 @@ void NumberInput::draw() {
 
     // text
     int tx = _x + (_w - INC_DEC_BUTTON_W) / 2 - tw / 2;
-    int ty = _y + _h / 2 + gout.cdescent();
+    int ty = _y + _h / 2 - gout.cascent() + gout.cdescent() + 2;
     gout << color(255, 255, 255) << move_to(tx, ty) << text(_text);
 
     // cursor
     if(_input_focus) {
         gout << move_to(tx + tw, ty);
-        gout << line_to(tx + tw, ty - gout.cascent());
+        gout << line_to(tx + tw, ty + gout.cascent());
     }
 
     // increment button
@@ -112,7 +112,7 @@ void NumberInput::draw() {
     else
         gout << color(0, 0, 0);
     gout << move_to(_x + _w - 2 - INC_DEC_BUTTON_W, _y + 2) << box_to(_x + _w - 3, _y + (_h - 3) / 2);
-    gout << color(255, 255, 255) << move_to(_x + _w - INC_DEC_BUTTON_W / 2 - 5, _y + 2 + gout.cascent()) << text("+");
+    gout << color(255, 255, 255) << move_to(_x + _w - INC_DEC_BUTTON_W / 2 - 5, (_y + _h / 2) - gout.cascent()) << text("+");
 
     // decrement button
     if(_dec_pressed)
@@ -120,7 +120,7 @@ void NumberInput::draw() {
     else
         gout << color(0, 0, 0);
     gout << move_to(_x + _w - 2 - INC_DEC_BUTTON_W, _y + 2 + (_h - 3) / 2) << box_to(_x + _w - 3, _y + _h - 3);
-    gout << color(255, 255, 255) << move_to(_x + _w - INC_DEC_BUTTON_W / 2 - 5, _y + _h - gout.cdescent()) << text("-");
+    gout << color(255, 255, 255) << move_to(_x + _w - INC_DEC_BUTTON_W / 2 - 5, _y + _h - gout.cascent() - 2) << text("-");
 }
 
 void NumberInput::unfocus() {

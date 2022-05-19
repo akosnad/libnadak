@@ -20,7 +20,7 @@ void Button::draw() {
     gout << move_to(_x + 2, _y + 2) << box(_w - 4, _h - 4);
 
     int tx = _x + _w / 2 - gout.twidth(_text) / 2;
-    int ty = _y + _h / 2 + gout.cdescent();
+    int ty = _y + _h / 2 - (gout.cascent() + gout.cdescent()) / 2;
     gout << color(255, 255, 255) << move_to(tx, ty) << text(_text);
 }
 

@@ -141,7 +141,7 @@ void Dropdown::draw() {
     gout << move_to(_x + 2, _y + 2) << box(_w - 8 - DROPDOWN_BUTTON_W, _closed_h - 4);
 
     if(_selected_i >= 0 && _selected_i < (int)_choices.size())
-        gout << color(255, 255, 255) << move_to(_x + 4, _y + 2 + gout.cascent()) << text(_choices[_selected_i]);
+        gout << color(255, 255, 255) << move_to(_x + 4, _y + gout.cdescent()) << text(_choices[_selected_i]);
 
     // dropdown button
     if(_dropdown_open || _dropdown_pressed)
@@ -150,7 +150,7 @@ void Dropdown::draw() {
         gout << color(0, 0, 0);
     gout << move_to(_x + (_w - 4 - DROPDOWN_BUTTON_W), _y + 2) << box_to(_x + _w - 3, _y + _closed_h - 3);
 
-    gout << color(255, 255, 255) << move_to(_x + _w - 4 - (DROPDOWN_BUTTON_W / 2) - gout.twidth("v") / 2, _y + 2 + gout.cascent()) << text("v");
+    gout << color(255, 255, 255) << move_to(_x + _w - 4 - (DROPDOWN_BUTTON_W / 2) - gout.twidth("v") / 2, _y + gout.cdescent()) << text("v");
 
     // dropdown
     if(_dropdown_open) {
@@ -169,7 +169,7 @@ void Dropdown::draw() {
 
             gout << move_to(_x + 2, _y + 4 + (i + 1) * DH) << box(_w - 4, DH - 2);
             if(i +_scroll_i < (int)_choices.size())
-                gout << color(255, 255, 255) << move_to(_x + 4, _y + 4 + (i + 1) * DH + gout.cascent()) << text(_choices[i + _scroll_i]);
+                gout << color(255, 255, 255) << move_to(_x + 4, _y  + (i + 1) * DH + gout.cdescent()) << text(_choices[i + _scroll_i]);
         }
     }
 }
