@@ -22,6 +22,6 @@ target_link_libraries(test_widgets nadak_lib)
 add_custom_command(
     TARGET nadak_lib POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
-    ${CMAKE_SOURCE_DIR}/LiberationSans-Regular.ttf
-    ${CMAKE_CURRENT_BINARY_DIR}/.
+    ${CMAKE_CURRENT_SOURCE_DIR}/LiberationSans-Regular.ttf
+    ${CMAKE_BINARY_DIR}/.
 )
