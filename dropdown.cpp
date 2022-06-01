@@ -5,8 +5,6 @@ using namespace std;
 using namespace genv;
 
 static const int DROPDOWN_BUTTON_W = 15;
-static const int CH = gout.cascent() + gout.cdescent();
-static const int DH = CH + 4;
 
 Dropdown::Dropdown(Container* parent, int x, int y, int w, int h, int n_to_show, std::vector<std::string> choices)
     : Dropdown(parent, x, y, w, h, n_to_show, choices, -1) {
@@ -19,6 +17,9 @@ Dropdown::Dropdown(Container* parent, int x, int y, int w, int h, int n_to_show,
             _dropdown_highlighted_i = default_index;
             _scroll_i = default_index;
         }
+
+        _ch = gout.cascent() + gout.cdescent();
+        _dh = _ch + 4;
 }
 
 string Dropdown::value() {
@@ -31,9 +32,9 @@ string Dropdown::value() {
 void Dropdown::set_height() {
     if(_dropdown_open) {
         if((int)_choices.size() < _n_to_show)
-            _h = _closed_h + _choices.size() * DH;
+            _h = _closed_h + _choices.size() * _dh;
         else
-            _h = _closed_h + _n_to_show * DH;
+            _h = _closed_h + _n_to_show * _dh;
     } else
         _h = _closed_h;
 }
@@ -158,7 +159,7 @@ void Dropdown::draw() {
         if(n > (int)_choices.size())
             n = _choices.size();
 
-        int dh = n * DH;
+        int dh = n * _dh;
         gout << color(255, 255, 255) << move_to(_x, _y + _closed_h) << box(_w, dh);
 
         for(int i = 0; i < n; i++) {
@@ -167,9 +168,9 @@ void Dropdown::draw() {
             else
                 gout << color(0, 0, 0);
 
-            gout << move_to(_x + 2, _y + 4 + (i + 1) * DH) << box(_w - 4, DH - 2);
+            gout << move_to(_x + 2, _y + 4 + (i + 1) * _dh) << box(_w - 4, _dh - 2);
             if(i +_scroll_i < (int)_choices.size())
-                gout << color(255, 255, 255) << move_to(_x + 4, _y  + (i + 1) * DH + gout.cdescent()) << text(_choices[i + _scroll_i]);
+                gout << color(255, 255, 255) << move_to(_x + 4, _y  + (i + 1) * _dh + gout.cdescent()) << text(_choices[i + _scroll_i]);
         }
     }
 }

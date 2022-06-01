@@ -36,6 +36,11 @@ void NumberInput::limit() {
         _on_changed(_n);
 }
 
+void NumberInput::set_value(int n) {
+    _n = n;
+    limit();
+}
+
 inline void NumberInput::increment(int amount) {
     _n += amount;
     limit();

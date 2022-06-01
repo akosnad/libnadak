@@ -24,6 +24,7 @@ public:
     virtual void draw();
     virtual void unfocus();
     int value() { return _n; }
+    void set_value(int n);
     void set_limits(int min, int max);
 };
 

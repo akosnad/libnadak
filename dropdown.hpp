@@ -9,7 +9,7 @@ class Window;
 class Dropdown : public Widget {
 protected:
     std::vector<std::string> _choices;
-    int _selected_i, _closed_h, _dropdown_highlighted_i, _n_to_show, _scroll_i;
+    int _selected_i, _closed_h, _dropdown_highlighted_i, _n_to_show, _scroll_i, _ch, _dh;
     bool _dropdown_pressed, _dropdown_open;
     void set_height();
     void scroll_down();
